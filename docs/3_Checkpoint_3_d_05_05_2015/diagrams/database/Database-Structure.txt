@@ -1,0 +1,43 @@
+USERS:
+	user_id: Unique ID for each user
+	username: Unique username for each user
+	pwd: password for the user
+	email: email of the registered user
+	admin_flag: TINYINT (1-> admin 0 -> normal user)
+CONVERSATIONS:
+	conv_id: Unique id for each conversation
+	user_one: (Only applicable for one to one chat) id of the first user
+	user_two: (Only applicable for one to one chat) id of second user
+	chat_type: Whether the chat is group chat or one to one
+		(If group then their will be more than two user_id in "userlist")
+	time_user_one: (Only one to one chat) user_one cannot see messages befor this time (due to delete history option)
+	time_user_two: (Only one to one chat) user_two cannot see messages befor this time (due to delete history option)
+	status: (Only one to one chat) will check the "reciever" from "conv_map" and update the current status (read/ unread)
+GROUP_USERS:
+	conv_id: id of the conversation
+	user_id: which user is participating in the conversation
+	status: read/ unread/ sender
+	time_user: (for group conversations) last msg sent from the user to the group
+BLOCK_LIST:
+	user_id_by: this user HAS blocked
+	user_id_to: this user IS blocked
+CONV_MAP
+	conv_msg_id: to order the messages ( if by time-stamp does not work)
+	conv_id: conversation id
+	user_id_s: user id of the sender of the message
+	user_id_r: (only in case of one to one chat) user id of the receiver
+	msg_type: file/txt
+	text_id: id of the text message (if any)
+	file_id: id of the file attached (if any)
+	time: to show the messages orderwise
+TEXT:
+	text_id: id for the text message
+	text_msg: the "text" of the message
+FILE:
+	file_id: id for the file attached
+	filename: Name of the file as Varchar
+	file_size: Size of the file as Varchar
+	content: MEDIUMBLOB datatype (BLOB: Binary large object) will store the content in binary format ( 16 mb limit )
+ADDRESS:
+	user_id: THIS particular user
+	user_id_has: has THIS user added as contact
